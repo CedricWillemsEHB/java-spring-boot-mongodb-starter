@@ -47,7 +47,7 @@ public class MongoDBPersonRepository implements PersonRepository {
 
     @PostConstruct
     void init() {
-        personCollection = client.getDatabase("test").getCollection("persons", Person.class);
+        personCollection = client.getDatabase("dnd").getCollection("persons", Person.class);
     }
 
     @Override
