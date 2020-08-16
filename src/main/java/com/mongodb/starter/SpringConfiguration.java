@@ -13,6 +13,10 @@ import org.springframework.context.annotation.Configuration;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
+/**
+ * source: https://github.com/MaBeuLux88/java-spring-boot-mongodb-starter.git
+ */
+
 @Configuration
 public class SpringConfiguration {
 

@@ -16,6 +16,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import static com.google.common.base.Predicates.not;
 
+/**
+ * source: https://github.com/MaBeuLux88/java-spring-boot-mongodb-starter.git
+ */
+
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig extends WebMvcConfigurationSupport {
