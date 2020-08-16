@@ -10,7 +10,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.FindOneAndReplaceOptions;
 import com.mongodb.client.model.ReplaceOneModel;
 import com.mongodb.client.model.WriteModel;
-import com.mongodb.starter.models.Person;
 import com.mongodb.starter.models.User;
 import org.bson.BsonDocument;
 import org.bson.types.ObjectId;
@@ -45,9 +44,14 @@ public class MongoDBUserRepository implements UserRepository {
 
     @Override
     public User save(User user) {
-        user.setId(new ObjectId());
-        userCollection.insertOne(user);
-        return user;
+        //TODO If the email already exist do not save
+        User u =  findByEmail(user.getEmail());
+        if(u == null){
+            user.setId(new ObjectId());
+            userCollection.insertOne(user);
+            return user;
+        }
+        return null;
     }
 
     @Override
@@ -73,8 +77,13 @@ public class MongoDBUserRepository implements UserRepository {
     }
 
     @Override
-    public User findOne(String id) {
+    public User findById(String id) {
         return userCollection.find(eq("_id", new ObjectId(id))).first();
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userCollection.find(eq("email", email)).first();
     }
 
     @Override

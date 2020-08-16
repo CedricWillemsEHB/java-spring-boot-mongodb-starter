@@ -1,11 +1,11 @@
 package com.mongodb.starter.controllers;
 
-import com.mongodb.starter.models.Person;
 import com.mongodb.starter.models.User;
 import com.mongodb.starter.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,9 +41,18 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    @GetMapping("user/{id}")
-    public ResponseEntity<User> getUser(@PathVariable String id) {
-        User user = userRepository.findOne(id);
+    @RequestMapping(value = "/user", params="emailID", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> getUserByEmails(@RequestParam("emailID") String email) {
+        System.out.println("getUserByEmails");
+        User user = userRepository.findByEmail(email);
+        if (user == null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        return ResponseEntity.ok(user);
+    }
+
+    @RequestMapping(value = "/user", params="userID", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> getUserByID(@RequestParam("userID") String id) {
+        User user = userRepository.findById(id);
         if (user == null)
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         return ResponseEntity.ok(user);
@@ -76,8 +85,9 @@ public class UserController {
         return userRepository.deleteAll();
     }
 
-    @PutMapping("user")
+    @RequestMapping(value = "/user", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public User putUser(@RequestBody User user) {
+        System.out.println("putUser");
         return userRepository.update(user);
     }
 
