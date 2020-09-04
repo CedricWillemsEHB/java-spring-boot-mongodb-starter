@@ -1,6 +1,5 @@
 package com.mongodb.starter.repositories;
 
-import com.mongodb.starter.models.Person;
 import com.mongodb.starter.models.User;
 import org.springframework.stereotype.Repository;
 
