@@ -28,5 +28,5 @@ jobs:
       with:
         app-name: 'bachlordnd'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_300316deb3ac4aa89fadda023d60704c }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_3c6fd71b1acb4552817a6053606eaeff }}
         package: '${{ github.workspace }}/target/*.jar'
